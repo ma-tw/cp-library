@@ -14,6 +14,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/unionfind.hpp
       title: graph/unionfind.hpp
+  - name: math
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: math/prime_factor.hpp
+      title: math/prime_factor.hpp
   verificationCategories:
   - name: test
     pages:
@@ -23,6 +28,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/example.test.cpp
       title: test/example.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/prime_factor.test.cpp
+      title: test/prime_factor.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unionfind.test.cpp
       title: test/unionfind.test.cpp
