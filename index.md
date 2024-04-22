@@ -1,6 +1,11 @@
 ---
 data:
   libraryCategories:
+  - name: algo
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: algo/cuml_sum.hpp
+      title: algo/cuml_sum.hpp
   - name: geometry
     pages:
     - icon: ':warning:'
@@ -22,6 +27,9 @@ data:
   verificationCategories:
   - name: test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/cuml_sum.test.cpp
+      title: test/cuml_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/dijkstra.test.cpp
       title: test/dijkstra.test.cpp
