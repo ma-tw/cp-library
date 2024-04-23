@@ -6,6 +6,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: algo/cuml_sum.hpp
       title: algo/cuml_sum.hpp
+    - icon: ':heavy_check_mark:'
+      path: algo/cuml_sum_2d.hpp
+      title: algo/cuml_sum_2d.hpp
+    - icon: ':warning:'
+      path: algo/imos.hpp
+      title: algo/imos.hpp
   - name: geometry
     pages:
     - icon: ':warning:'
@@ -30,6 +36,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/cuml_sum.test.cpp
       title: test/cuml_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/cuml_sum_2d.test.cpp
+      title: test/cuml_sum_2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/dijkstra.test.cpp
       title: test/dijkstra.test.cpp
