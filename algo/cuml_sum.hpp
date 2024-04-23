@@ -11,7 +11,8 @@ struct CumlSum {
     }
 
     // [l, r)
-    T sum(int l, int r) {
+    // O(n * (calls after changes))
+    T sum(unsigned int l, unsigned int r) {
         if (!ready) {
             for (int i = 0; i < (int) _s.size() - 1; i++) {
                 _s[i + 1] = _s[i] + _a[i];
