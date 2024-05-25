@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: test/cuml_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-04-23 17:41:18+09:00'
+  timestamp: '2024-05-04 20:54:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/cuml_sum.test.cpp

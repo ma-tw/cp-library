@@ -27,12 +27,18 @@ data:
       title: graph/unionfind.hpp
   - name: math
     pages:
+    - icon: ':x:'
+      path: math/binomial.hpp
+      title: math/binomial.hpp
     - icon: ':heavy_check_mark:'
       path: math/prime_factor.hpp
       title: math/prime_factor.hpp
   verificationCategories:
   - name: test
     pages:
+    - icon: ':x:'
+      path: test/binomial.test.cpp
+      title: test/binomial.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/cuml_sum.test.cpp
       title: test/cuml_sum.test.cpp

@@ -45,12 +45,12 @@ data:
     \ - _s[i][j];\n                }\n            }\n            ready = true;\n \
     \       }\n        return _s[row_high][col_high] + _s[row_low][col_low] - _s[row_high][col_low]\
     \ - _s[row_low][col_high];\n    }\n    private:\n    int _h, _w;\n    vector<vector<T>>\
-    \ _s, _a;\n    bool ready;\n};"
+    \ _s, _a;\n    bool ready;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: algo/cuml_sum_2d.hpp
   requiredBy: []
-  timestamp: '2024-04-23 17:41:18+09:00'
+  timestamp: '2024-05-04 20:54:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/cuml_sum_2d.test.cpp

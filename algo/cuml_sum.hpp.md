@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: algo/imos.hpp
+    title: algo/imos.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/cuml_sum.test.cpp
@@ -30,12 +33,13 @@ data:
     \    for (int i = 0; i < (int) _s.size() - 1; i++) {\n                _s[i + 1]\
     \ = _s[i] + _a[i];\n            }\n            ready = true;\n        }\n    \
     \    return _s[r] - _s[l];\n    }\n    private:\n    vector<T> _s, _a;\n    bool\
-    \ ready;\n};"
+    \ ready;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: algo/cuml_sum.hpp
-  requiredBy: []
-  timestamp: '2024-04-23 17:41:18+09:00'
+  requiredBy:
+  - algo/imos.hpp
+  timestamp: '2024-05-04 20:54:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/cuml_sum.test.cpp
