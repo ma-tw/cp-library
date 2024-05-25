@@ -96,6 +96,9 @@ data:
   - name: test
     pages:
     - icon: ':x:'
+      path: test/atcoder_example.test.cpp
+      title: test/atcoder_example.test.cpp
+    - icon: ':x:'
       path: test/binary_search.test.cpp
       title: test/binary_search.test.cpp
     - icon: ':heavy_check_mark:'
