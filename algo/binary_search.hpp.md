@@ -13,12 +13,12 @@ data:
     links: []
   bundledCode: "#line 1 \"algo/binary_search.hpp\"\n#include <functional>\n\n// binary\
     \ search, finds the border of determ\ntemplate <typename T = long long, typename\
-    \ U>\nT find_border(T ok, T ng, const U determ) {\n    while (abs(ok - ng) > 1)\
+    \ F>\nT find_border(T ok, T ng, const F determ) {\n    while (abs(ok - ng) > 1)\
     \ {\n        T mid = (ok + ng) / 2;\n        if (determ(mid)) {\n            ok\
     \ = mid;\n        } else {\n            ng = mid;\n        }\n    }\n    return\
     \ ok;\n}\n"
   code: "#include <functional>\n\n// binary search, finds the border of determ\ntemplate\
-    \ <typename T = long long, typename U>\nT find_border(T ok, T ng, const U determ)\
+    \ <typename T = long long, typename F>\nT find_border(T ok, T ng, const F determ)\
     \ {\n    while (abs(ok - ng) > 1) {\n        T mid = (ok + ng) / 2;\n        if\
     \ (determ(mid)) {\n            ok = mid;\n        } else {\n            ng = mid;\n\
     \        }\n    }\n    return ok;\n}\n"
@@ -26,7 +26,7 @@ data:
   isVerificationFile: false
   path: algo/binary_search.hpp
   requiredBy: []
-  timestamp: '2024-06-14 18:05:02+09:00'
+  timestamp: '2024-06-15 20:04:59+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/binary_search.test.cpp

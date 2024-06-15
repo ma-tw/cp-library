@@ -16,8 +16,8 @@ data:
     - https://atcoder.jp/contests/typical90/tasks/typical90_a
   bundledCode: "#line 1 \"test/binary_search.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/typical90/tasks/typical90_a\"\
     \n#include <bits/stdc++.h>\n#line 2 \"algo/binary_search.hpp\"\n\n// binary search,\
-    \ finds the border of determ\ntemplate <typename T = long long, typename U>\n\
-    T find_border(T ok, T ng, const U determ) {\n    while (abs(ok - ng) > 1) {\n\
+    \ finds the border of determ\ntemplate <typename T = long long, typename F>\n\
+    T find_border(T ok, T ng, const F determ) {\n    while (abs(ok - ng) > 1) {\n\
     \        T mid = (ok + ng) / 2;\n        if (determ(mid)) {\n            ok =\
     \ mid;\n        } else {\n            ng = mid;\n        }\n    }\n    return\
     \ ok;\n}\n#line 4 \"test/binary_search.test.cpp\"\nusing namespace std;\n\nint\
@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: test/binary_search.test.cpp
   requiredBy: []
-  timestamp: '2024-06-14 18:05:02+09:00'
+  timestamp: '2024-06-15 20:04:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/binary_search.test.cpp
