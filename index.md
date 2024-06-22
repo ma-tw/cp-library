@@ -32,7 +32,7 @@ data:
     - icon: ':warning:'
       path: atcoder/internal_csr.hpp
       title: atcoder/internal_csr.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: atcoder/internal_math.hpp
       title: atcoder/internal_math.hpp
     - icon: ':warning:'
@@ -41,7 +41,7 @@ data:
     - icon: ':warning:'
       path: atcoder/internal_scc.hpp
       title: atcoder/internal_scc.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: atcoder/internal_type_traits.hpp
       title: atcoder/internal_type_traits.hpp
     - icon: ':warning:'
@@ -56,7 +56,7 @@ data:
     - icon: ':warning:'
       path: atcoder/mincostflow.hpp
       title: atcoder/mincostflow.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: atcoder/modint.hpp
       title: atcoder/modint.hpp
     - icon: ':warning:'
@@ -86,7 +86,7 @@ data:
       title: graph/unionfind.hpp
   - name: math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/binomial.hpp
       title: math/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -101,7 +101,7 @@ data:
     - icon: ':x:'
       path: test/binary_search.test.cpp
       title: test/binary_search.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/binomial.test.cpp
       title: test/binomial.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,37 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/internal_math.hpp
     title: atcoder/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/internal_type_traits.hpp
     title: atcoder/internal_type_traits.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/modint.hpp
     title: atcoder/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/binomial.hpp
     title: math/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
     links:
     - https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
   bundledCode: "#line 1 \"test/binomial.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n#line 1 \"atcoder/modint.hpp\"\
-    \n\n\n\n#line 6 \"atcoder/modint.hpp\"\n#include <type_traits>\n\n#ifdef _MSC_VER\n\
-    #include <intrin.h>\n#endif\n\n#line 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line\
-    \ 5 \"atcoder/internal_math.hpp\"\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\
-    \nnamespace atcoder {\n\nnamespace internal {\n\n// @param m `1 <= m`\n// @return\
-    \ x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n    x %=\
-    \ m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication\
-    \ by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n#line 2 \"math/binomial.hpp\"\
+    \n\n#line 1 \"atcoder/modint.hpp\"\n\n\n\n#line 6 \"atcoder/modint.hpp\"\n#include\
+    \ <type_traits>\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\n#line 1 \"\
+    atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\n\n#ifdef\
+    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace internal\
+    \ {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long safe_mod(long\
+    \ long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n    return x;\n\
+    }\n\n// Fast modular multiplication by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
     // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
     \   unsigned long long im;\n\n    // @param m `1 <= m`\n    explicit barrett(unsigned\
     \ int m) : _m(m), im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n\
@@ -230,7 +230,7 @@ data:
     \ntemplate <class> struct is_dynamic_modint : public std::false_type {};\ntemplate\
     \ <int id>\nstruct is_dynamic_modint<dynamic_modint<id>> : public std::true_type\
     \ {};\n\ntemplate <class T>\nusing is_dynamic_modint_t = std::enable_if_t<is_dynamic_modint<T>::value>;\n\
-    \n}  // namespace internal\n\n}  // namespace atcoder\n\n\n#line 3 \"math/binomial.hpp\"\
+    \n}  // namespace internal\n\n}  // namespace atcoder\n\n\n#line 5 \"math/binomial.hpp\"\
     \nusing namespace std;\n\n// requires that mod p is prime\n// 1 <= k <= n <= 1e7\n\
     // build O(n_max), call O(1)\nstruct BinomNSmall {\n    BinomNSmall(int n_max,\
     \ int mod) : fact(n_max + 1), fact_inv(n_max + 1), inv(n_max + 1), MOD(mod) {\n\
@@ -238,17 +238,17 @@ data:
     \    fact_inv[0] = fact_inv[1] = 1;\n        inv[1] = 1;\n        for (int i =\
     \ 2; i <= n_max; i++) {\n            fact[i] = fact[i - 1] * i;\n            inv[i]\
     \ = -inv[MOD % i] * (MOD / i);\n            fact_inv[i] = fact_inv[i - 1] * inv[i];\n\
-    \        }\n    }\n    atcoder::modint operator() (int n, int k) {\n        if\
-    \ (n < k) return 0;\n        if (n < 0 || k < 0) return 0;\n        return fact[n]\
-    \ * fact_inv[k] * fact_inv[n - k];\n    }\n    private:\n    vector<atcoder::modint>\
+    \        }\n    }\n    int operator() (int n, int k) {\n        if (n < k) return\
+    \ 0;\n        if (n < 0 || k < 0) return 0;\n        return (fact[n] * fact_inv[k]\
+    \ * fact_inv[n - k]).val();\n    }\n    private:\n    vector<atcoder::modint>\
     \ fact, fact_inv, inv;\n    const int MOD;\n};\n\n// n is const\n// 1 <= n <=\
     \ 1e9\n// 1 <= k <= 1e7\n// build O(k), call O(1)\nstruct BinomNLarge {\n    BinomNLarge(int\
     \ n, int k_max, int mod) : binom_(k_max + 1), n_(n), k_max_(k_max) {\n       \
     \ atcoder::modint::set_mod(mod);\n        binom_[0] = 1;\n        for (int i =\
     \ 1; i <= k_max; i++) {\n            binom_[i] = binom_[i - 1] * (n - i + 1) /\
-    \ i;\n        }\n    }\n    atcoder::modint operator() (int k) {\n        if (n_\
-    \ < k) return 0;\n        if (n_ < 0 || k < 0) return 0;\n        if (k > k_max_)\
-    \ return 0;\n        return binom_[k];\n    }\n    private:\n    vector<atcoder::modint>\
+    \ i;\n        }\n    }\n    int operator() (int k) {\n        if (n_ < k) return\
+    \ 0;\n        if (n_ < 0 || k < 0) return 0;\n        if (k > k_max_) return 0;\n\
+    \        return binom_[k].val();\n    }\n    private:\n    vector<atcoder::modint>\
     \ binom_;\n    int n_, k_max_;\n};\n#line 5 \"test/binomial.test.cpp\"\n\nint\
     \ main() {\n    int t, m;\n    cin >> t >> m;\n    BinomNSmall binom(int(1e7),\
     \ m);\n    for (int i = 0; i < t; i++) {\n        int n, k;\n        cin >> n\
@@ -266,8 +266,8 @@ data:
   isVerificationFile: true
   path: test/binomial.test.cpp
   requiredBy: []
-  timestamp: '2024-05-25 15:39:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-06-22 20:58:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/binomial.test.cpp
 layout: document

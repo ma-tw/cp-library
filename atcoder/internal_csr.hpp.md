@@ -46,8 +46,8 @@ data:
   requiredBy:
   - atcoder/mincostflow.hpp
   - atcoder/twosat.hpp
-  - atcoder/internal_scc.hpp
   - atcoder/scc.hpp
+  - atcoder/internal_scc.hpp
   timestamp: '2024-05-25 15:39:42+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

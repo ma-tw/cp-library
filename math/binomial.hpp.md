@@ -1,60 +1,60 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/internal_math.hpp
     title: atcoder/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/internal_type_traits.hpp
     title: atcoder/internal_type_traits.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: atcoder/modint.hpp
     title: atcoder/modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/binomial.test.cpp
     title: test/binomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"atcoder/modint.hpp\"\n\n\n\n#include <cassert>\n#include\
-    \ <numeric>\n#include <type_traits>\n\n#ifdef _MSC_VER\n#include <intrin.h>\n\
-    #endif\n\n#line 1 \"atcoder/internal_math.hpp\"\n\n\n\n#include <utility>\n\n\
-    #ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
-    \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
-    \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
-    \    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n// Reference:\
-    \ https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider after Ice\
-    \ Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long im;\n\n\
-    \    // @param m `1 <= m`\n    explicit barrett(unsigned int m) : _m(m), im((unsigned\
-    \ long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int umod() const\
-    \ { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b `0 <= b < m`\n\
-    \    // @return `a * b % m`\n    unsigned int mul(unsigned int a, unsigned int\
-    \ b) const {\n        // [1] m = 1\n        // a = b = im = 0, so okay\n\n   \
-    \     // [2] m >= 2\n        // im = ceil(2^64 / m)\n        // -> im * m = 2^64\
-    \ + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c, d < m)\n       \
-    \ // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r + d*im\n     \
-    \   // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 + m * (m + 1) <\
-    \ 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n        unsigned long\
-    \ long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
-    \        _umul128(z, im, &x);\n#else\n        unsigned long long x =\n       \
-    \     (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n     \
-    \   unsigned long long y = x * _m;\n        return (unsigned int)(z - y + (z <\
-    \ y ? _m : 0));\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1 <= m`\n// @return\
-    \ `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long long x, long long\
-    \ n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned int)(m);\n\
-    \    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x, m);\n \
-    \   while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y * y) % _m;\n\
-    \        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n// M. Forisek and\
-    \ J. Jancina,\n// Fast Primality Testing for Integers That Fit into a Machine\
-    \ Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int n) {\n   \
-    \ if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return true;\n\
-    \    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while (d % 2\
-    \ == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for (long\
-    \ long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
+  bundledCode: "#line 2 \"math/binomial.hpp\"\n\n#line 1 \"atcoder/modint.hpp\"\n\n\
+    \n\n#include <cassert>\n#include <numeric>\n#include <type_traits>\n\n#ifdef _MSC_VER\n\
+    #include <intrin.h>\n#endif\n\n#line 1 \"atcoder/internal_math.hpp\"\n\n\n\n#include\
+    \ <utility>\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder\
+    \ {\n\nnamespace internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr\
+    \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
+    \ x += m;\n    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n\
+    // Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider\
+    \ after Ice Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long\
+    \ im;\n\n    // @param m `1 <= m`\n    explicit barrett(unsigned int m) : _m(m),\
+    \ im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int\
+    \ umod() const { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b\
+    \ `0 <= b < m`\n    // @return `a * b % m`\n    unsigned int mul(unsigned int\
+    \ a, unsigned int b) const {\n        // [1] m = 1\n        // a = b = im = 0,\
+    \ so okay\n\n        // [2] m >= 2\n        // im = ceil(2^64 / m)\n        //\
+    \ -> im * m = 2^64 + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c,\
+    \ d < m)\n        // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r\
+    \ + d*im\n        // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 +\
+    \ m * (m + 1) < 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n       \
+    \ unsigned long long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned\
+    \ long long x;\n        _umul128(z, im, &x);\n#else\n        unsigned long long\
+    \ x =\n            (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n\
+    #endif\n        unsigned long long y = x * _m;\n        return (unsigned int)(z\
+    \ - y + (z < y ? _m : 0));\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1\
+    \ <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
+    \ long x, long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m\
+    \ = (unsigned int)(m);\n    unsigned long long r = 1;\n    unsigned long long\
+    \ y = safe_mod(x, m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n\
+    \        y = (y * y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n\
+    // M. Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit\
+    \ into a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
+    \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
+    \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
+    \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
+    \ (long long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
     \ t, n);\n        while (t != n - 1 && y != 1 && y != n - 1) {\n            y\
     \ = y * y % n;\n            t <<= 1;\n        }\n        if (y != n - 1 && t %\
     \ 2 == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
@@ -226,7 +226,7 @@ data:
     \ntemplate <class> struct is_dynamic_modint : public std::false_type {};\ntemplate\
     \ <int id>\nstruct is_dynamic_modint<dynamic_modint<id>> : public std::true_type\
     \ {};\n\ntemplate <class T>\nusing is_dynamic_modint_t = std::enable_if_t<is_dynamic_modint<T>::value>;\n\
-    \n}  // namespace internal\n\n}  // namespace atcoder\n\n\n#line 2 \"math/binomial.hpp\"\
+    \n}  // namespace internal\n\n}  // namespace atcoder\n\n\n#line 4 \"math/binomial.hpp\"\
     \n#include <vector>\nusing namespace std;\n\n// requires that mod p is prime\n\
     // 1 <= k <= n <= 1e7\n// build O(n_max), call O(1)\nstruct BinomNSmall {\n  \
     \  BinomNSmall(int n_max, int mod) : fact(n_max + 1), fact_inv(n_max + 1), inv(n_max\
@@ -234,39 +234,38 @@ data:
     \ fact[1] = 1;\n        fact_inv[0] = fact_inv[1] = 1;\n        inv[1] = 1;\n\
     \        for (int i = 2; i <= n_max; i++) {\n            fact[i] = fact[i - 1]\
     \ * i;\n            inv[i] = -inv[MOD % i] * (MOD / i);\n            fact_inv[i]\
-    \ = fact_inv[i - 1] * inv[i];\n        }\n    }\n    atcoder::modint operator()\
-    \ (int n, int k) {\n        if (n < k) return 0;\n        if (n < 0 || k < 0)\
-    \ return 0;\n        return fact[n] * fact_inv[k] * fact_inv[n - k];\n    }\n\
-    \    private:\n    vector<atcoder::modint> fact, fact_inv, inv;\n    const int\
-    \ MOD;\n};\n\n// n is const\n// 1 <= n <= 1e9\n// 1 <= k <= 1e7\n// build O(k),\
-    \ call O(1)\nstruct BinomNLarge {\n    BinomNLarge(int n, int k_max, int mod)\
-    \ : binom_(k_max + 1), n_(n), k_max_(k_max) {\n        atcoder::modint::set_mod(mod);\n\
-    \        binom_[0] = 1;\n        for (int i = 1; i <= k_max; i++) {\n        \
-    \    binom_[i] = binom_[i - 1] * (n - i + 1) / i;\n        }\n    }\n    atcoder::modint\
-    \ operator() (int k) {\n        if (n_ < k) return 0;\n        if (n_ < 0 || k\
-    \ < 0) return 0;\n        if (k > k_max_) return 0;\n        return binom_[k];\n\
-    \    }\n    private:\n    vector<atcoder::modint> binom_;\n    int n_, k_max_;\n\
-    };\n"
-  code: "#include \"../atcoder/modint\"\n#include <vector>\nusing namespace std;\n\
-    \n// requires that mod p is prime\n// 1 <= k <= n <= 1e7\n// build O(n_max), call\
-    \ O(1)\nstruct BinomNSmall {\n    BinomNSmall(int n_max, int mod) : fact(n_max\
-    \ + 1), fact_inv(n_max + 1), inv(n_max + 1), MOD(mod) {\n        atcoder::modint::set_mod(mod);\n\
-    \        fact[0] = fact[1] = 1;\n        fact_inv[0] = fact_inv[1] = 1;\n    \
-    \    inv[1] = 1;\n        for (int i = 2; i <= n_max; i++) {\n            fact[i]\
-    \ = fact[i - 1] * i;\n            inv[i] = -inv[MOD % i] * (MOD / i);\n      \
-    \      fact_inv[i] = fact_inv[i - 1] * inv[i];\n        }\n    }\n    atcoder::modint\
-    \ operator() (int n, int k) {\n        if (n < k) return 0;\n        if (n < 0\
-    \ || k < 0) return 0;\n        return fact[n] * fact_inv[k] * fact_inv[n - k];\n\
-    \    }\n    private:\n    vector<atcoder::modint> fact, fact_inv, inv;\n    const\
-    \ int MOD;\n};\n\n// n is const\n// 1 <= n <= 1e9\n// 1 <= k <= 1e7\n// build\
-    \ O(k), call O(1)\nstruct BinomNLarge {\n    BinomNLarge(int n, int k_max, int\
-    \ mod) : binom_(k_max + 1), n_(n), k_max_(k_max) {\n        atcoder::modint::set_mod(mod);\n\
-    \        binom_[0] = 1;\n        for (int i = 1; i <= k_max; i++) {\n        \
-    \    binom_[i] = binom_[i - 1] * (n - i + 1) / i;\n        }\n    }\n    atcoder::modint\
-    \ operator() (int k) {\n        if (n_ < k) return 0;\n        if (n_ < 0 || k\
-    \ < 0) return 0;\n        if (k > k_max_) return 0;\n        return binom_[k];\n\
-    \    }\n    private:\n    vector<atcoder::modint> binom_;\n    int n_, k_max_;\n\
-    };"
+    \ = fact_inv[i - 1] * inv[i];\n        }\n    }\n    int operator() (int n, int\
+    \ k) {\n        if (n < k) return 0;\n        if (n < 0 || k < 0) return 0;\n\
+    \        return (fact[n] * fact_inv[k] * fact_inv[n - k]).val();\n    }\n    private:\n\
+    \    vector<atcoder::modint> fact, fact_inv, inv;\n    const int MOD;\n};\n\n\
+    // n is const\n// 1 <= n <= 1e9\n// 1 <= k <= 1e7\n// build O(k), call O(1)\n\
+    struct BinomNLarge {\n    BinomNLarge(int n, int k_max, int mod) : binom_(k_max\
+    \ + 1), n_(n), k_max_(k_max) {\n        atcoder::modint::set_mod(mod);\n     \
+    \   binom_[0] = 1;\n        for (int i = 1; i <= k_max; i++) {\n            binom_[i]\
+    \ = binom_[i - 1] * (n - i + 1) / i;\n        }\n    }\n    int operator() (int\
+    \ k) {\n        if (n_ < k) return 0;\n        if (n_ < 0 || k < 0) return 0;\n\
+    \        if (k > k_max_) return 0;\n        return binom_[k].val();\n    }\n \
+    \   private:\n    vector<atcoder::modint> binom_;\n    int n_, k_max_;\n};\n"
+  code: "#pragma once\n\n#include \"../atcoder/modint\"\n#include <vector>\nusing\
+    \ namespace std;\n\n// requires that mod p is prime\n// 1 <= k <= n <= 1e7\n//\
+    \ build O(n_max), call O(1)\nstruct BinomNSmall {\n    BinomNSmall(int n_max,\
+    \ int mod) : fact(n_max + 1), fact_inv(n_max + 1), inv(n_max + 1), MOD(mod) {\n\
+    \        atcoder::modint::set_mod(mod);\n        fact[0] = fact[1] = 1;\n    \
+    \    fact_inv[0] = fact_inv[1] = 1;\n        inv[1] = 1;\n        for (int i =\
+    \ 2; i <= n_max; i++) {\n            fact[i] = fact[i - 1] * i;\n            inv[i]\
+    \ = -inv[MOD % i] * (MOD / i);\n            fact_inv[i] = fact_inv[i - 1] * inv[i];\n\
+    \        }\n    }\n    int operator() (int n, int k) {\n        if (n < k) return\
+    \ 0;\n        if (n < 0 || k < 0) return 0;\n        return (fact[n] * fact_inv[k]\
+    \ * fact_inv[n - k]).val();\n    }\n    private:\n    vector<atcoder::modint>\
+    \ fact, fact_inv, inv;\n    const int MOD;\n};\n\n// n is const\n// 1 <= n <=\
+    \ 1e9\n// 1 <= k <= 1e7\n// build O(k), call O(1)\nstruct BinomNLarge {\n    BinomNLarge(int\
+    \ n, int k_max, int mod) : binom_(k_max + 1), n_(n), k_max_(k_max) {\n       \
+    \ atcoder::modint::set_mod(mod);\n        binom_[0] = 1;\n        for (int i =\
+    \ 1; i <= k_max; i++) {\n            binom_[i] = binom_[i - 1] * (n - i + 1) /\
+    \ i;\n        }\n    }\n    int operator() (int k) {\n        if (n_ < k) return\
+    \ 0;\n        if (n_ < 0 || k < 0) return 0;\n        if (k > k_max_) return 0;\n\
+    \        return binom_[k].val();\n    }\n    private:\n    vector<atcoder::modint>\
+    \ binom_;\n    int n_, k_max_;\n};"
   dependsOn:
   - atcoder/modint.hpp
   - atcoder/internal_math.hpp
@@ -274,8 +273,8 @@ data:
   isVerificationFile: false
   path: math/binomial.hpp
   requiredBy: []
-  timestamp: '2024-05-25 15:39:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-06-22 20:58:53+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/binomial.test.cpp
 documentation_of: math/binomial.hpp

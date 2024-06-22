@@ -29,19 +29,31 @@ data:
     \ ry);\n\n        // ry \u304C rx \u306E\u5B50\u3068\u3059\u308B\n        par[ry]\
     \ = rx;\n        if (rank[rx] == rank[ry]) rank[rx]++;\n        size_mem[rx] +=\
     \ size_mem[ry];\n\n        return true;\n    }\n\n    int size(int x) {\n    \
-    \    assert(0 <= x && x < n);\n        return size_mem[root(x)];\n    }  \n};\n\
-    \nstruct UnionFind2D {\n    private:\n    int h, w;\n    UnionFind uf;\n    \n\
-    \    public:\n    UnionFind2D(int _h, int _w) : h(_h), w(_w), uf(_h * _w) {}\n\
-    \n    std::pair<int, int> root(int i, int j) {\n        int tmp = uf.root(i *\
-    \ w + j);\n        return std::make_pair(tmp / w, tmp % w);\n    }\n\n    bool\
-    \ same(int i1, int j1, int i2, int j2) {\n        return uf.same(i1 * w + j1,\
-    \ i2 * w + j2);\n    }\n\n    bool unite(int i1, int j1, int i2, int j2) {\n \
-    \       return uf.unite(i1 * w + j1, i2 * w + j2);\n    }\n\n    int size(int\
-    \ i, int j) {\n        return uf.size(i * w + j);\n    }\n};\n#line 4 \"test/unionfind.test.cpp\"\
-    \nusing namespace std;\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n  \
-    \  UnionFind uf(n);\n    while (q--) {\n        int t, u, v;\n        cin >> t\
-    \ >> u >> v;\n        if (t == 0) {\n            uf.unite(u, v);\n        } else\
-    \ {\n            cout << (int) uf.same(u, v) << endl;\n        }\n    }\n}\n"
+    \    assert(0 <= x && x < n);\n        return size_mem[root(x)];\n    }\n\n  \
+    \  std::vector<std::vector<int>> groups() {\n        std::vector<std::vector<int>>\
+    \ tmp(n);\n        for (int i = 0; i < n; i++) {\n            tmp[root(i)].push_back(i);\n\
+    \        }\n        std::vector<std::vector<int>> ret;\n        for (int i = 0;\
+    \ i < n; i++) {\n            if (!tmp[i].empty()) {\n                ret.push_back(tmp[i]);\n\
+    \            }\n        }\n        return ret;\n    }\n};\n\nstruct UnionFind2D\
+    \ {\n    private:\n    int h, w;\n    UnionFind uf;\n    \n    public:\n    UnionFind2D(int\
+    \ _h, int _w) : h(_h), w(_w), uf(_h * _w) {}\n\n    std::pair<int, int> root(int\
+    \ i, int j) {\n        int tmp = uf.root(i * w + j);\n        return std::make_pair(tmp\
+    \ / w, tmp % w);\n    }\n\n    bool same(int i1, int j1, int i2, int j2) {\n \
+    \       return uf.same(i1 * w + j1, i2 * w + j2);\n    }\n\n    bool unite(int\
+    \ i1, int j1, int i2, int j2) {\n        return uf.unite(i1 * w + j1, i2 * w +\
+    \ j2);\n    }\n\n    int size(int i, int j) {\n        return uf.size(i * w +\
+    \ j);\n    }\n\n    std::vector<std::vector<std::pair<int, int>>> groups() {\n\
+    \        std::vector<std::vector<std::pair<int, int>>> tmp(h * w);\n        for\
+    \ (int i = 0; i < h; i++) {\n            for (int j = 0; j < w; j++) {\n     \
+    \           std::pair<int, int> r = root(i, j);\n                tmp[r.first *\
+    \ w + r.second].emplace_back(i, j);\n            }\n        }\n        std::vector<std::vector<std::pair<int,\
+    \ int>>> ret;\n        for (int i = 0; i < h * w; i++) {\n            if (!tmp[i].empty())\
+    \ {\n                ret.push_back(tmp[i]);\n            }\n        }\n      \
+    \  return ret;\n    }\n};\n#line 4 \"test/unionfind.test.cpp\"\nusing namespace\
+    \ std;\n\nint main() {\n    int n, q;\n    cin >> n >> q;\n    UnionFind uf(n);\n\
+    \    while (q--) {\n        int t, u, v;\n        cin >> t >> u >> v;\n      \
+    \  if (t == 0) {\n            uf.unite(u, v);\n        } else {\n            cout\
+    \ << (int) uf.same(u, v) << endl;\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include <bits/stdc++.h>\n\
     #include \"../graph/unionfind.hpp\"\nusing namespace std;\n\nint main() {\n  \
     \  int n, q;\n    cin >> n >> q;\n    UnionFind uf(n);\n    while (q--) {\n  \
@@ -53,7 +65,7 @@ data:
   isVerificationFile: true
   path: test/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2024-04-20 12:12:58+09:00'
+  timestamp: '2024-06-22 20:58:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/unionfind.test.cpp
