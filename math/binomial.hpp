@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../atcoder/modint"
 #include <vector>
 using namespace std;
@@ -17,10 +19,10 @@ struct BinomNSmall {
             fact_inv[i] = fact_inv[i - 1] * inv[i];
         }
     }
-    atcoder::modint operator() (int n, int k) {
+    int operator() (int n, int k) {
         if (n < k) return 0;
         if (n < 0 || k < 0) return 0;
-        return fact[n] * fact_inv[k] * fact_inv[n - k];
+        return (fact[n] * fact_inv[k] * fact_inv[n - k]).val();
     }
     private:
     vector<atcoder::modint> fact, fact_inv, inv;
@@ -39,11 +41,11 @@ struct BinomNLarge {
             binom_[i] = binom_[i - 1] * (n - i + 1) / i;
         }
     }
-    atcoder::modint operator() (int k) {
+    int operator() (int k) {
         if (n_ < k) return 0;
         if (n_ < 0 || k < 0) return 0;
         if (k > k_max_) return 0;
-        return binom_[k];
+        return binom_[k].val();
     }
     private:
     vector<atcoder::modint> binom_;
