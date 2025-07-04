@@ -4,7 +4,7 @@ using namespace std;
 template<typename T = long long>
 struct CumlSum2D {
     CumlSum2D(size_t h, size_t w) : _h(h), _w(w), _s(h + 1, vector<T>(w + 1)), _a(h, vector<T>(w)), ready(false) {}
-    CumlSum2D(vector<vector<T>> a) : _h(a.size()), _w(a.empty() ? 0 : a[0].size()), _s(_h, vector<T>(_w)), _a(a), ready(false) {}
+    CumlSum2D(vector<vector<T>> a) : _h(a.size()), _w(a.empty() ? 0 : a[0].size()), _s(_h + 1, vector<T>(_w + 1)), _a(a), ready(false) {}
     void assign(unsigned int i, unsigned int j, T x) {
         if (_a[i][j] != x) ready = false;
         _a[i][j] = x;
