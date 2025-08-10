@@ -1,0 +1,20 @@
+int di[] = {0, 1, 0, -1};
+int dj[] = {1, 0, -1, 0};
+
+
+vvi d(h, vi(w, INF));
+d[*][*] = 0;
+queue<pair<int, int>> q;
+
+while (!q.empty()) {
+    auto [ci, cj] = q.front();
+    q.pop();
+    for (int k = 0; k < 4; k++) {
+        int ni = ci + di[k];
+        int nj = cj + dj[k];
+        if (inrange(ni, 0, h) && inrange(nj, 0, w) && d[ni][nj] == INF && /* CONDITION */) {
+            chmin(d[ni][nj], d[ci][cj] + 1);
+            q.push({ni, nj});
+        }
+    }
+}

@@ -45,7 +45,21 @@ struct UnionFind {
     int size(int x) {
         assert(0 <= x && x < n);
         return size_mem[root(x)];
-    }  
+    }
+
+    std::vector<std::vector<int>> groups() {
+        std::vector<std::vector<int>> tmp(n);
+        for (int i = 0; i < n; i++) {
+            tmp[root(i)].push_back(i);
+        }
+        std::vector<std::vector<int>> ret;
+        for (int i = 0; i < n; i++) {
+            if (!tmp[i].empty()) {
+                ret.push_back(tmp[i]);
+            }
+        }
+        return ret;
+    }
 };
 
 struct UnionFind2D {
@@ -71,5 +85,22 @@ struct UnionFind2D {
 
     int size(int i, int j) {
         return uf.size(i * w + j);
+    }
+
+    std::vector<std::vector<std::pair<int, int>>> groups() {
+        std::vector<std::vector<std::pair<int, int>>> tmp(h * w);
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                std::pair<int, int> r = root(i, j);
+                tmp[r.first * w + r.second].emplace_back(i, j);
+            }
+        }
+        std::vector<std::vector<std::pair<int, int>>> ret;
+        for (int i = 0; i < h * w; i++) {
+            if (!tmp[i].empty()) {
+                ret.push_back(tmp[i]);
+            }
+        }
+        return ret;
     }
 };

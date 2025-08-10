@@ -43,7 +43,7 @@ struct BinomNLarge {
         if (n_ < k) return 0;
         if (n_ < 0 || k < 0) return 0;
         if (k > k_max_) return 0;
-        return binom_[k];
+        return binom_[k].val();
     }
     private:
     long long modpow(long long a, long long b) {
