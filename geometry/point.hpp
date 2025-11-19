@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-
 struct Point {
     using C = std::complex<double>;
     Point() : z() {}
@@ -16,6 +14,7 @@ struct Point {
         return z;
     }
 
+    // Point op Point
     Point operator+(const Point &pt) {
         return Point(z + pt.c());
     }
@@ -47,6 +46,23 @@ struct Point {
     }
     Point &operator/=(const Point &pt) {
         *this = *this / pt;
+        return *this;
+    }
+
+    // Point op double
+    Point operator*(const double k) {
+        return Point(z * k);
+    }
+    Point operator/(const double k) {
+        return Point(z / k);
+    }
+
+    Point &operator*=(const double k) {
+        *this = *this * k;
+        return *this;
+    }
+    Point &operator/=(const double k) {
+        *this = *this / k;
         return *this;
     }
 
