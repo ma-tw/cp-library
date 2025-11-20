@@ -25,3 +25,5 @@ struct CumlSum {
     vector<T> _s, _a;
     bool ready;
 };
+
+////////////////// vector<int> 渡しちゃだめ ////////////////////////
