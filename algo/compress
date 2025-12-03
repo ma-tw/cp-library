@@ -1,0 +1,12 @@
+// REQUIRES: T: int, long long
+// EFFECTS: vecを座標圧縮 (0 始まり)
+// RETURNS: 座標圧縮後の種類数
+template <typename T>
+int compress(std::vector<T> &vec) {
+    std::map<T, int> mp;
+    for (auto e : vec) mp[e] = 0;
+    int crr = 0;
+    for (auto &[k, v] : mp) v = crr++;
+    for (auto &e : vec) e = mp[e];
+    return crr;
+}
