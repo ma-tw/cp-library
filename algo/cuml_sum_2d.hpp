@@ -1,35 +1,37 @@
 #include <vector>
+#include <type_traits>
 using namespace std;
 
-template<typename T = long long>
+template<typename T>
 struct CumlSum2D {
-    CumlSum2D(size_t h, size_t w) : _h(h), _w(w), _s(h + 1, vector<T>(w + 1)), _a(h, vector<T>(w)), ready(false) {}
-    CumlSum2D(vector<vector<T>> a) : _h(a.size()), _w(a.empty() ? 0 : a[0].size()), _s(_h + 1, vector<T>(_w + 1)), _a(a), ready(false) {}
+    static_assert(!is_same<T, int>::value);
+    CumlSum2D(size_t h, size_t w) : h(h), w(w), s(h + 1, vector<T>(w + 1)), a(h, vector<T>(w)), ready(false) {}
+    CumlSum2D(vector<vector<T>> a) : h(a.size()), w(a.empty() ? 0 : a[0].size()), s(h + 1, vector<T>(w + 1)), a(a), ready(false) {}
     void assign(unsigned int i, unsigned int j, T x) {
-        if (_a[i][j] != x) ready = false;
-        _a[i][j] = x;
+        if (a[i][j] != x) ready = false;
+        a[i][j] = x;
     }
 
     // [row_low, row_high), [col_low, col_high)
     // O(hw * (calls after changes))
     T sum(unsigned int row_low, unsigned int col_low, unsigned int row_high, unsigned int col_high) {
         if (!ready) {
-            for (int i = 0; i < _h; i++) {
-                for (int j = 0; j < _w; j++) {
-                    _s[i + 1][j + 1] = _a[i][j];
+            for (int i = 0; i < h; i++) {
+                for (int j = 0; j < w; j++) {
+                    s[i + 1][j + 1] = a[i][j];
                 }
             }
-            for (int i = 0; i < _h; i++) {
-                for (int j = 0; j < _w; j++) {
-                    _s[i + 1][j + 1] += _s[i][j + 1] + _s[i + 1][j] - _s[i][j];
+            for (int i = 0; i < h; i++) {
+                for (int j = 0; j < w; j++) {
+                    s[i + 1][j + 1] += s[i][j + 1] + s[i + 1][j] - s[i][j];
                 }
             }
             ready = true;
         }
-        return _s[row_high][col_high] + _s[row_low][col_low] - _s[row_high][col_low] - _s[row_low][col_high];
+        return s[row_high][col_high] + s[row_low][col_low] - s[row_high][col_low] - s[row_low][col_high];
     }
     private:
-    int _h, _w;
-    vector<vector<T>> _s, _a;
+    int h, w;
+    vector<vector<T>> s, a;
     bool ready;
 };
