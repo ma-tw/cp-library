@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-// requires that mod p is prime
+// REQUIRES: `mod` is prime 
 // 1 <= k <= n <= 1e7
 // build O(n_max), call O(1)
 struct BinomNSmall {
@@ -43,7 +43,7 @@ struct BinomNLarge {
         if (n_ < k) return 0;
         if (n_ < 0 || k < 0) return 0;
         if (k > k_max_) return 0;
-        return binom_[k].val();
+        return binom_[k];
     }
     private:
     long long modpow(long long a, long long b) {
