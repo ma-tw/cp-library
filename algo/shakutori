@@ -1,0 +1,59 @@
+// reference ecottea https://atcoder.jp/contests/abc452/submissions/74667906
+
+//【尺取り法】O(n β)
+/*
+* 与えられた列 a[0..n) と連続部分列に対する判定関数 is_ok について，
+* 各 l∈[0..n] について is_ok(a[l..r))=true となる最大の r≦n を max_right[l] に，
+* 各 r∈[0..n] について is_ok(a[l..r))=true となる最小の l≧0 を min_left[r] にそれぞれ格納する．
+*
+* 制約：is_ok(φ)=true，is_ok は単調，右追加と左削除が O(β) で可能
+*/
+template <class T>
+void two_pointers(const vector<T>& a, vi& max_right, vi& min_left) {
+	// verify : https://atcoder.jp/contests/typical90/tasks/typical90_ck
+
+	int n = sz(a);
+	max_right.resize(n + 1); min_left.resize(n + 1);
+
+	// -------------- ここを実装する（auto の方が速い） ---------------
+
+	// 必要なデータ構造を用意する．
+
+	// 区間の右に a[i] を追加し，データ構造を更新する．
+
+	// 区間の左から a[i] を削除し，データ構造を更新する．
+
+	// データ構造を参照して ok かを返す．
+	auto is_ok = [&]() {
+	};
+
+	// --------------------------------------------------------------
+
+	// l, r : a[l..r) を走査中であることを表す．
+	int l = 0, r = 0;
+
+	while (true) {
+		// is_ok( a[l..r) ) = true の場合
+		if (is_ok()) {
+			// いまの l は固定された r に対して最小の l となっている．
+			min_left[r] = l;
+
+			// 走査完了
+			if (r == n) break;
+
+			// 右を 1 つ進める．
+			insert_right(r++);
+		}
+		// is_ok( a[l..r) ) = false の場合
+		else {
+			// いまの r は固定された l に対して最大の r より 1 だけ大きい．
+			max_right[l] = r - 1;
+
+			// 左を 1 つ進める．
+			erase_left(l++);
+		}
+	}
+
+	// いま is_ok( a[l..n) ) = true なので，l をより大きくしても true となる．
+	for (; l <= n; l++) max_right[l] = n;
+}

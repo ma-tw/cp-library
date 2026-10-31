@@ -1,0 +1,24 @@
+struct BIT2 {
+    vvi arr;
+    int n, m;
+    BIT2(int n, int m) : arr(n + 1, vi(m + 1, 0)), n(n), m(m) {}
+    int sum(int x, int y) {
+        int s = 0;
+        for (int i = x; i > 0; i -= i & -i) {
+            for (int j = y; j > 0; j -= j & -j) {
+                s += arr[i][j];
+            }
+        }
+        return s;
+    }
+    int sum(int x1, int y1, int x2, int y2) {
+        return sum(x2, y2) - sum(x1 - 1, y2) - sum(x2, y1 - 1) + sum(x1 - 1, y1 - 1);
+    }
+    void add(int x, int y, int k) {
+        for (int i = x; i <= n; i += i & -i) {
+            for (int j = y; j <= m; j += j & -j) {
+                arr[i][j] += k;
+            }
+        }
+    }
+};

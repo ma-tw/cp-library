@@ -1,0 +1,14 @@
+template<typename T, int kinds = 26, char start = 'a'>
+struct CharIndexedVector : vector<T> {
+    public:
+        CharIndexedVector() : v(vector<T>(kinds)) {}
+        CharIndexedVector(T x) : v(vector<T>(kinds, x)) {}
+        const T &operator[](const char c) const & {
+            return v[c - start];
+        }
+        T &operator[](const char c) & {
+            return v[c - start];
+        }
+    private:
+        vector<T> v;
+};
